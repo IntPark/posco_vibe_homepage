@@ -25,6 +25,10 @@
           <a href="#careers">Careers</a>
         </nav>
         <div class="nav-actions">
+          <button class="auth-trigger" id="auth-trigger" type="button" data-open-dialog="auth-dialog">
+            <span class="auth-avatar" aria-hidden="true">P</span>
+            <span id="auth-trigger-label">로그인</span>
+          </button>
           <button class="icon-button search-button" type="button" aria-label="검색 열기" data-open-dialog="search-dialog">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21 21-4.35-4.35m2.35-5.15a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z" /></svg>
           </button>
@@ -111,6 +115,36 @@
 
     <dialog class="dialog" id="search-dialog" aria-labelledby="search-title"><form method="dialog" class="dialog-panel"><button class="dialog-close" aria-label="닫기">×</button><p class="dialog-label">POSCO Search</p><h2 id="search-title">무엇을 찾고 계신가요?</h2><label class="search-field"><span class="sr-only">검색어</span><input type="search" placeholder="검색어를 입력하세요" autofocus /><button class="button" type="submit">검색</button></label></form></dialog>
     <dialog class="dialog" id="contact-dialog" aria-labelledby="contact-title"><form method="dialog" class="dialog-panel contact-panel"><button class="dialog-close" aria-label="닫기">×</button><p class="dialog-label">Contact POSCO</p><h2 id="contact-title">문의하기</h2><p>담당 부서에 전달할 문의 내용을 남겨주세요.</p><label>이름<input type="text" required placeholder="이름을 입력하세요" /></label><label>이메일<input type="email" required placeholder="name@example.com" /></label><label>문의 내용<textarea rows="4" required placeholder="문의 내용을 입력하세요"></textarea></label><button class="button" type="submit">문의 보내기</button></form></dialog>
+    <dialog class="dialog auth-dialog" id="auth-dialog" aria-labelledby="auth-title">
+      <div class="dialog-panel auth-panel">
+        <button class="dialog-close" type="button" aria-label="닫기" data-close-dialog>×</button>
+        <section id="auth-signed-out">
+          <p class="dialog-label">POSCO ACCOUNT</p>
+          <h2 id="auth-title">POSCO에 오신 것을 환영합니다</h2>
+          <p class="auth-description">이메일로 로그인하거나 새 계정을 만들어 주세요.</p>
+          <div class="auth-tabs" role="tablist" aria-label="계정 메뉴">
+            <button class="auth-tab is-active" id="login-tab" type="button" role="tab" aria-selected="true" aria-controls="auth-form">로그인</button>
+            <button class="auth-tab" id="signup-tab" type="button" role="tab" aria-selected="false" aria-controls="auth-form">회원가입</button>
+          </div>
+          <form id="auth-form" class="auth-form">
+            <label id="auth-email-label">이메일<input id="auth-email" type="email" autocomplete="email" placeholder="name@example.com" required /></label>
+            <label>비밀번호<input id="auth-password" type="password" autocomplete="current-password" minlength="6" placeholder="6자 이상 입력해 주세요" required /></label>
+            <button class="button auth-submit" id="auth-submit" type="submit">로그인</button>
+            <button class="auth-reset" id="auth-reset" type="button">비밀번호를 잊으셨나요?</button>
+          </form>
+          <p class="auth-message" id="auth-message" role="status" aria-live="polite"></p>
+        </section>
+        <section id="auth-signed-in" class="auth-account" hidden>
+          <p class="dialog-label">MY POSCO</p>
+          <div class="account-avatar" aria-hidden="true">P</div>
+          <h2>로그인되었습니다</h2>
+          <p id="account-email"></p>
+          <button class="button button-outline auth-signout" id="auth-signout" type="button">로그아웃</button>
+          <p class="auth-message" id="signout-message" role="status" aria-live="polite"></p>
+        </section>
+      </div>
+    </dialog>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="app.js"></script>
   </body>
 </html>
